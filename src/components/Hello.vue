@@ -6,16 +6,19 @@
           type: 'text',
           name: 'name',
           placeholder: 'Name',
+          classNames: ['is-primary'],
         },
         {
           type: 'email',
           name: 'email',
           placeholder: 'E-mail Address',
+          disabled: true,
         },
         {
           type: 'password',
           name: 'password',
           placeholder: 'Password',
+          readonly: true,
         },
         {
           type: 'tel',
