@@ -5,28 +5,41 @@
         {
           type: 'text',
           name: 'name',
+          label: 'Full Name',
           placeholder: 'Name',
-          classNames: ['is-primary'],
+          classNames: ['is-primary', 'is-large'],
+          icon: 'user',
         },
         {
           type: 'email',
           name: 'email',
+          label: 'E-mail Address',
           placeholder: 'E-mail Address',
           disabled: true,
+          classNames: 'is-medium',
+          icon: {
+            left: 'envelope',
+            right: 'check',
+          },
         },
         {
           type: 'password',
           name: 'password',
+          label: 'Password',
           placeholder: 'Password',
+          classNames: 'is-small',
           readonly: true,
         },
         {
           type: 'tel',
           name: 'phone_number',
+          label: 'Phone Number',
           placeholder: 'Phone Number',
+          classNames: ['is-info'],
         },
       ]"
       :form-object="formObject"
+      :form-errors="formErrors"
     ></vuelma-form>
   </div>
 </template>
@@ -47,6 +60,9 @@ export default {
         password: '',
         phone_number: '',
       },
+      formErrors: {
+        name: ['Invalid format!'],
+      },
     };
   },
 };
@@ -54,4 +70,5 @@ export default {
 
 <style>
 @import '~bulma/css/bulma.css';
+@import '~font-awesome/css/font-awesome.css';
 </style>

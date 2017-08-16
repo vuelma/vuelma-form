@@ -4,15 +4,26 @@
     @submit.prevent="$emit('submit')"
   >
     <template v-for="field in fields">
-      <input-field
-        v-model="formObject[field.name]"
+      <div
+        class="field"
         :key="field.name"
-        :input-type="field.type"
-        :classNames="field.classNames"
-        :placeholder="field.placeholder"
-        :disabled="field.disabled"
-        :readonly="field.readonly"
-      ></input-field>
+      >
+        <label
+          class="label"
+          v-if="field.label"
+        >
+          {{ field.label }}
+        </label>
+        <input-field
+          v-model="formObject[field.name]"
+          :input-type="field.type"
+          :classNames="field.classNames"
+          :placeholder="field.placeholder"
+          :disabled="field.disabled"
+          :readonly="field.readonly"
+          :icon="field.icon"
+        ></input-field>
+      </div>
     </template>
   </form>
 </template>

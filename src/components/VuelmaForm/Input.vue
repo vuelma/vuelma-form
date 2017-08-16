@@ -1,23 +1,30 @@
 <template>
-  <div class="TextField field">
-    <div class="control">
-      <input
-        class="input"
-        :class="classNames"
-        :type="inputType"
-        :placeholder="placeholder"
-        :value="value"
-        :disabled="disabled"
-        :readonly="readonly"
-        @input="$emit('input', $event.target.value)"
-      >
-    </div>
+  <div
+    class="control"
+    :class="{ 'has-icons-left': hasIconsLeft, 'has-icons-right': hasIconsRight }"
+  >
+    <input
+      class="input"
+      :class="classNames"
+      :type="inputType"
+      :placeholder="placeholder"
+      :value="value"
+      :disabled="disabled"
+      :readonly="readonly"
+      @input="$emit('input', $event.target.value)"
+    >
+    <span class="icon is-left" v-if="hasIconsLeft">
+      <i :class="`fa fa-${this.iconLeft}`"></i>
+    </span>
+    <span class="icon is-right" v-if="hasIconsRight">
+      <i :class="`fa fa-${this.iconRight}`"></i>
+    </span>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'text-field',
+  name: 'input-field',
   props: {
     /**
      * The bound data from the form component.
@@ -34,6 +41,11 @@ export default {
       type: String,
       default: 'text',
     },
+
+    /**
+     * The icon(s) that will be added as addons.
+     */
+    icon: [String, Object],
 
     /**
      * The class names that will be appended to the input field.
@@ -54,6 +66,29 @@ export default {
      * Determines whether to the input field is readonly or not.
      */
     readonly: Boolean,
+  },
+  computed: {
+    hasIconsLeft() {
+      return (typeof this.icon === 'string')
+        || (typeof this.icon === 'object' && !!this.icon.left);
+    },
+    hasIconsRight() {
+      return (typeof this.icon === 'object' && !!this.icon.right);
+    },
+    iconLeft() {
+      if (!this.hasIconsLeft) {
+        return null;
+      }
+
+      return (typeof this.icon === 'string') ? this.icon : this.icon.left;
+    },
+    iconRight() {
+      if (!this.hasIconsRight) {
+        return null;
+      }
+
+      return this.icon.right;
+    },
   },
 };
 </script>
