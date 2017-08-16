@@ -6,9 +6,12 @@
     <template v-for="field in fields">
       <input-field
         v-model="formObject[field.name]"
-        :input-type="field.type"
-        :placeholder="field.placeholder"
         :key="field.name"
+        :input-type="field.type"
+        :classNames="field.classNames"
+        :placeholder="field.placeholder"
+        :disabled="field.disabled"
+        :readonly="field.readonly"
       ></input-field>
     </template>
   </form>
