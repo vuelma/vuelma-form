@@ -4,8 +4,23 @@
       :fields="[
         {
           type: 'text',
-          name: 'text1',
-          placeholder: 'Insert text here...',
+          name: 'name',
+          placeholder: 'Name',
+        },
+        {
+          type: 'email',
+          name: 'email',
+          placeholder: 'E-mail Address',
+        },
+        {
+          type: 'password',
+          name: 'password',
+          placeholder: 'Password',
+        },
+        {
+          type: 'tel',
+          name: 'phone_number',
+          placeholder: 'Phone Number',
         },
       ]"
       :form-object="formObject"
@@ -24,7 +39,10 @@ export default {
   data() {
     return {
       formObject: {
-        text1: '',
+        name: '',
+        email: '',
+        password: '',
+        phone_number: '',
       },
     };
   },
