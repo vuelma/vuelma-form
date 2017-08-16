@@ -17,11 +17,13 @@
         <input-field
           v-model="formObject[field.name]"
           :input-type="field.type"
+          :name="field.name"
           :classNames="field.classNames"
           :placeholder="field.placeholder"
           :disabled="field.disabled"
           :readonly="field.readonly"
           :icon="field.icon"
+          :errors="formErrors[field.name]"
         ></input-field>
       </div>
     </template>
@@ -56,10 +58,7 @@ export default {
     /**
      * The object containing form (validation) errors.
      */
-    errors: {
-      type: Object,
-      default: () => ({}),
-    },
+    formErrors: Object,
   },
 };
 </script>

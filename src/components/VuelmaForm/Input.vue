@@ -5,20 +5,30 @@
   >
     <input
       class="input"
-      :class="classNames"
+      :class="hasErrors ? ['is-danger', ...classNames] : classNames"
       :type="inputType"
+      :name="name"
       :placeholder="placeholder"
       :value="value"
       :disabled="disabled"
       :readonly="readonly"
       @input="$emit('input', $event.target.value)"
     >
+
     <span class="icon is-left" v-if="hasIconsLeft">
       <i :class="`fa fa-${this.iconLeft}`"></i>
     </span>
     <span class="icon is-right" v-if="hasIconsRight">
       <i :class="`fa fa-${this.iconRight}`"></i>
     </span>
+
+    <p
+      class="help is-danger"
+      v-for="error in errors"
+      :key="error"
+    >
+      {{ error }}
+    </p>
   </div>
 </template>
 
@@ -41,6 +51,19 @@ export default {
       type: String,
       default: 'text',
     },
+
+    /**
+     * The form errors associated with the input field.
+     */
+    errors: {
+      type: Array,
+      default: () => ([]),
+    },
+
+    /**
+     * The name of the input field.
+     */
+    name: String,
 
     /**
      * The icon(s) that will be added as addons.
@@ -88,6 +111,9 @@ export default {
       }
 
       return this.icon.right;
+    },
+    hasErrors() {
+      return this.errors.length > 0;
     },
   },
 };
