@@ -2,8 +2,8 @@
   <div class="TextField field">
     <div class="control">
       <input
-        type="text"
         class="input"
+        :type="inputType"
         :placeholder="placeholder"
         :value="value"
         @input="$emit('input', $event.target.value)"
@@ -29,6 +29,11 @@ export default {
      */
     placeholder: {
       type: String,
+    },
+
+    inputType: {
+      type: String,
+      default: 'text',
     },
   },
 };

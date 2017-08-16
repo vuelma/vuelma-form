@@ -6,7 +6,7 @@
     <template v-for="field in fields">
       <input-field
         v-model="formObject[field.name]"
-        :type="field.type"
+        :input-type="field.type"
         :placeholder="field.placeholder"
         :key="field.name"
       ></input-field>
