@@ -65,6 +65,7 @@
           placeholder: 'Country',
           icon: 'globe',
           classNames: 'is-fullwidth',
+          datatype: Number,
         },
       ]"
       :form-object="formObject"

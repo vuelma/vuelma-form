@@ -28,7 +28,7 @@
           :options="field.options"
           :multiple="field.multiple"
           :size="field.size"
-          :is-number="field.isNumber"
+          :datatype="field.datatype"
         ></form-control>
       </div>
     </template>

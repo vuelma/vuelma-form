@@ -108,9 +108,12 @@ export default {
     },
 
     /**
-     * Determine whether the emitted value should be parsed as Number.
+     * The datatype of the emitted value.
      */
-    isNumber: Boolean,
+    datatype: {
+      type: Function,
+      default: String,
+    },
 
     /**
      * The name of the component.
@@ -218,12 +221,10 @@ export default {
         value = event.target.value;
       }
 
-      if (this.isNumber) {
-        if (typeof value === 'object') {
-          value = value.map(item => parseInt(item, 10));
-        } else {
-          value = parseInt(value, 10);
-        }
+      if (typeof value === 'object') {
+        value = value.map(item => this.datatype(item));
+      } else {
+        value = this.datatype(value);
       }
 
       this.$emit('input', value || null);
