@@ -63,8 +63,7 @@
             },
           ],
           placeholder: 'Country',
-          icon: 'globe',
-          classNames: 'is-fullwidth',
+          multiple: true,
           datatype: Number,
         },
       ]"

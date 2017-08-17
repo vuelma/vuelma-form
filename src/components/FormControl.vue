@@ -22,11 +22,12 @@
         class="select"
         :class="finalClassNames"
       >
+        <!-- FIXME: multiple selection not being rendered thru v-bind -->
         <select
           :value="value"
           :multiple="multiple"
           :size="multiple ? size : null"
-          @change="handleChange"
+          @input="handleChange"
         >
           <option
             disabled
@@ -44,7 +45,7 @@
         </select>
       </div>
 
-      <div class="icon is-left">
+      <div class="icon is-left" v-if="hasIconsLeft">
         <i :class="`fa fa-${iconLeft}`"></i>
       </div>
     </template>
@@ -128,7 +129,10 @@ export default {
     /**
      * The class names that will be appended to the component.
      */
-    classNames: [String, Array],
+    classNames: {
+      type: [String, Array],
+      default: () => ([]),
+    },
 
     /**
      * The placeholder text if the field is empty.
@@ -214,9 +218,7 @@ export default {
     handleChange(event) {
       let value;
       if (this.multiple) {
-        value = [...event.target.options]
-          .filter(option => option.selected)
-          .map(option => option.value);
+        value = [...event.target.selectedOptions].map(option => option.value);
       } else {
         value = event.target.value;
       }
