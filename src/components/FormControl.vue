@@ -50,6 +50,17 @@
       </div>
     </template>
 
+    <template v-else-if="inputType === 'checkbox'">
+      <label class="checkbox">
+        <input
+          type="checkbox"
+          :checked="value"
+          @change="handleChange"
+        >
+        {{ label }}
+      </label>
+    </template>
+
     <template v-else>
       <input
         class="input"
@@ -88,7 +99,7 @@ export default {
      * The bound data from the form component.
      */
     value: {
-      type: [String, Number, Array],
+      type: [String, Number, Array, Boolean],
       reqiured: true,
     },
 
@@ -120,6 +131,11 @@ export default {
      * The name of the component.
      */
     name: String,
+
+    /**
+     * The label associated with the component.
+     */
+    label: String,
 
     /**
      * The icon(s) that will be added as addons.
@@ -217,6 +233,12 @@ export default {
   methods: {
     handleChange(event) {
       let value;
+      if (this.inputType === 'checkbox') {
+        this.$emit('input', event.target.checked);
+
+        return;
+      }
+
       if (this.multiple) {
         value = [...event.target.selectedOptions].map(option => option.value);
       } else {

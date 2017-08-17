@@ -9,6 +9,7 @@
           placeholder: 'Name',
           classNames: ['is-primary', 'is-large'],
           icon: 'user',
+          datatype: Number,
         },
         {
           type: 'email',
@@ -66,6 +67,11 @@
           multiple: true,
           datatype: Number,
         },
+        {
+          type: 'checkbox',
+          name: 'remember',
+          label: 'Remember Me',
+        }
       ]"
       :form-object="formObject"
       :form-errors="formErrors"
@@ -90,6 +96,7 @@ export default {
         phone_number: null,
         comments: null,
         country: null,
+        remember: false,
       },
       formErrors: {
         name: ['Invalid format!'],

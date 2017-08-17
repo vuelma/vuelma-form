@@ -10,7 +10,7 @@
       >
         <label
           class="label"
-          v-if="field.label"
+          v-if="field.label && field.type !== 'checkbox'"
         >
           {{ field.label }}
         </label>
@@ -29,6 +29,7 @@
           :multiple="field.multiple"
           :size="field.size"
           :datatype="field.datatype"
+          :label="field.label"
         ></form-control>
       </div>
     </template>
