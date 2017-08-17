@@ -61,6 +61,26 @@
       </label>
     </template>
 
+    <template v-else-if="inputType === 'radio'">
+      <template v-for="option in options">
+        <label
+          class="radio"
+          :key="option.name"
+          :disabled="option.disabled"
+        >
+          <input
+            type="radio"
+            :name="name"
+            :value="option.value"
+            :checked="value === option.value"
+            :disabled="option.disabled"
+            @change="handleChange"
+          >
+          {{ option.label }}
+        </label>
+      </template>
+    </template>
+
     <template v-else>
       <input
         class="input"
@@ -171,7 +191,7 @@ export default {
     rows: Number,
 
     /**
-     * The array containing the options for the select control.
+     * The array containing the options for the select/radio control.
      */
     options: {
       type: Array,

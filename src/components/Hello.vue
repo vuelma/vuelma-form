@@ -71,6 +71,26 @@
           type: 'checkbox',
           name: 'remember',
           label: 'Remember Me',
+        },
+        {
+          type: 'radio',
+          name: 'gender',
+          label: 'Gender',
+          options: [
+            {
+              value: 'male',
+              label: 'Male',
+            },
+            {
+              value: 'female',
+              label: 'Female',
+            },
+            {
+              value: 'none',
+              label: 'None',
+              disabled: true,
+            },
+          ],
         }
       ]"
       :form-object="formObject"
@@ -97,6 +117,7 @@ export default {
         comments: null,
         country: null,
         remember: false,
+        gender: null,
       },
       formErrors: {
         name: ['Invalid format!'],
