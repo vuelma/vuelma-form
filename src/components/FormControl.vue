@@ -3,17 +3,33 @@
     class="control"
     :class="{ 'has-icons-left': hasIconsLeft, 'has-icons-right': hasIconsRight }"
   >
-    <input
-      class="input"
-      :class="hasErrors ? ['is-danger', ...classNames] : classNames"
-      :type="inputType"
-      :name="name"
-      :placeholder="placeholder"
-      :value="value"
-      :disabled="disabled"
-      :readonly="readonly"
-      @input="$emit('input', $event.target.value)"
-    >
+    <template v-if="inputType === 'textarea'">
+      <textarea
+        class="textarea"
+        :class="hasErrors ? ['is-danger', ...classNames] : classNames"
+        :name="name"
+        :placeholder="placeholder"
+        :value="value"
+        :disabled="disabled"
+        :readonly="readonly"
+        :rows="rows"
+        @input="$emit('input', $event.target.value)"
+      ></textarea>
+    </template>
+
+    <template v-else>
+      <input
+        class="input"
+        :class="hasErrors ? ['is-danger', ...classNames] : classNames"
+        :type="inputType"
+        :name="name"
+        :placeholder="placeholder"
+        :value="value"
+        :disabled="disabled"
+        :readonly="readonly"
+        @input="$emit('input', $event.target.value)"
+      >
+    </template>
 
     <span class="icon is-left" v-if="hasIconsLeft">
       <i :class="`fa fa-${this.iconLeft}`"></i>
@@ -89,6 +105,11 @@ export default {
      * Determines whether the component is readonly or not.
      */
     readonly: Boolean,
+
+    /**
+     * The number of rows of a textarea.
+     */
+    rows: Number,
   },
   computed: {
     hasIconsLeft() {

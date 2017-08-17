@@ -23,6 +23,7 @@
           :disabled="field.disabled"
           :readonly="field.readonly"
           :icon="field.icon"
+          :rows="field.rows"
           :errors="formErrors[field.name]"
         ></form-control>
       </div>

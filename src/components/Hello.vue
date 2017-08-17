@@ -37,6 +37,13 @@
           placeholder: 'Phone Number',
           classNames: ['is-info'],
         },
+        {
+          type: 'textarea',
+          name: 'comments',
+          label: 'Comments',
+          placeholder: 'Insert comments here...',
+          rows: 5,
+        },
       ]"
       :form-object="formObject"
       :form-errors="formErrors"
@@ -59,6 +66,7 @@ export default {
         email: '',
         password: '',
         phone_number: '',
+        comments: '',
       },
       formErrors: {
         name: ['Invalid format!'],
