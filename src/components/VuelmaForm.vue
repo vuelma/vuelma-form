@@ -14,7 +14,7 @@
         >
           {{ field.label }}
         </label>
-        <input-field
+        <form-control
           v-model="formObject[field.name]"
           :input-type="field.type"
           :name="field.name"
@@ -24,19 +24,19 @@
           :readonly="field.readonly"
           :icon="field.icon"
           :errors="formErrors[field.name]"
-        ></input-field>
+        ></form-control>
       </div>
     </template>
   </form>
 </template>
 
 <script>
-import InputField from './VuelmaForm/Input';
+import FormControl from './FormControl';
 
 export default {
   name: 'vuelma-form',
   components: {
-    InputField,
+    FormControl,
   },
   props: {
     /**

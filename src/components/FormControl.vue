@@ -45,7 +45,7 @@ export default {
     },
 
     /**
-     * The type of the input field.
+     * The input/field type of the component.
      */
     inputType: {
       type: String,
@@ -53,7 +53,7 @@ export default {
     },
 
     /**
-     * The form errors associated with the input field.
+     * The form errors associated with the component.
      */
     errors: {
       type: Array,
@@ -61,7 +61,7 @@ export default {
     },
 
     /**
-     * The name of the input field.
+     * The name of the component.
      */
     name: String,
 
@@ -71,7 +71,7 @@ export default {
     icon: [String, Object],
 
     /**
-     * The class names that will be appended to the input field.
+     * The class names that will be appended to the component.
      */
     classNames: [String, Array],
 
@@ -81,12 +81,12 @@ export default {
     placeholder: String,
 
     /**
-     * Determines whether to disable the input field or not.
+     * Determines whether to disable the component or not.
      */
     disabled: Boolean,
 
     /**
-     * Determines whether to the input field is readonly or not.
+     * Determines whether the component is readonly or not.
      */
     readonly: Boolean,
   },
