@@ -16,6 +16,7 @@
         </label>
         <form-control
           v-model="formObject[field.name]"
+          :errors="formErrors[field.name]"
           :input-type="field.type"
           :name="field.name"
           :classNames="field.classNames"
@@ -24,7 +25,10 @@
           :readonly="field.readonly"
           :icon="field.icon"
           :rows="field.rows"
-          :errors="formErrors[field.name]"
+          :options="field.options"
+          :multiple="field.multiple"
+          :size="field.size"
+          :is-number="field.isNumber"
         ></form-control>
       </div>
     </template>

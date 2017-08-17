@@ -44,6 +44,28 @@
           placeholder: 'Insert comments here...',
           rows: 5,
         },
+        {
+          type: 'select',
+          name: 'country',
+          label: 'Country',
+          options: [
+            {
+              value: 1,
+              label: 'Philippines',
+            },
+            {
+              value: 2,
+              label: 'Japan',
+            },
+            {
+              value: 3,
+              label: 'China',
+            },
+          ],
+          placeholder: 'Country',
+          icon: 'globe',
+          classNames: 'is-fullwidth',
+        },
       ]"
       :form-object="formObject"
       :form-errors="formErrors"
@@ -62,11 +84,12 @@ export default {
   data() {
     return {
       formObject: {
-        name: '',
-        email: '',
-        password: '',
-        phone_number: '',
-        comments: '',
+        name: null,
+        email: null,
+        password: null,
+        phone_number: null,
+        comments: null,
+        country: null,
       },
       formErrors: {
         name: ['Invalid format!'],
