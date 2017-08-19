@@ -9,7 +9,6 @@
           placeholder: 'Name',
           classNames: ['is-primary', 'is-large'],
           icon: 'user',
-          datatype: Number,
         },
         {
           type: 'email',
@@ -37,6 +36,7 @@
           label: 'Phone Number',
           placeholder: 'Phone Number',
           classNames: ['is-info'],
+          datatype: Number,
         },
         {
           type: 'textarea',
@@ -64,7 +64,6 @@
             },
           ],
           placeholder: 'Country',
-          multiple: true,
           datatype: Number,
         },
         {
@@ -91,7 +90,15 @@
               disabled: true,
             },
           ],
-        }
+        },
+        {
+          type: 'file',
+          name: 'avatar',
+          label: 'Avatar',
+          placeholder: 'Choose a file...',
+          classNames: ['has-name', 'is-fullwidth'],
+          icon: 'user',
+        },
       ]"
       :form-object="formObject"
       :form-errors="formErrors"
@@ -118,6 +125,7 @@ export default {
         country: null,
         remember: false,
         gender: null,
+        avatar: null,
       },
       formErrors: {
         name: ['Invalid format!'],

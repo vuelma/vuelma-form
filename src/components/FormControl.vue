@@ -81,6 +81,30 @@
       </template>
     </template>
 
+    <template v-else-if="inputType === 'file'">
+      <div class="file" :class="finalClassNames">
+      <label class="file-label">
+        <input
+          type="file"
+          class="file-input"
+          :name="name"
+          @change="handleChange"
+        >
+        <span class="file-cta">
+          <span class="file-icon">
+            <i :class="`fa fa-${iconLeft || 'upload'}`"></i>
+          </span>
+          <span class="file-label" v-text="placeholder"></span>
+        </span>
+        <span
+          class="file-name"
+          v-if="!!value"
+          v-text="value.name"
+        ></span>
+      </label>
+    </div>
+    </template>
+
     <template v-else>
       <input
         class="input"
@@ -119,7 +143,7 @@ export default {
      * The bound data from the form component.
      */
     value: {
-      type: [String, Number, Array, Boolean],
+      type: [String, Number, Array, Boolean, File],
       reqiured: true,
     },
 
@@ -257,6 +281,14 @@ export default {
         this.$emit('input', event.target.checked);
 
         return;
+      }
+
+      if (this.inputType === 'file') {
+        if (event.target.files.length > 0) {
+          this.$emit('input', event.target.files[0]);
+
+          return;
+        }
       }
 
       if (this.multiple) {
