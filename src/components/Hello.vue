@@ -9,6 +9,7 @@
           placeholder: 'Name',
           classNames: ['is-primary', 'is-large'],
           icon: 'user',
+          horizontal: true,
         },
         {
           type: 'email',
@@ -99,6 +100,14 @@
           classNames: ['has-name', 'is-fullwidth'],
           icon: 'user',
         },
+        {
+          type: 'text',
+          name: 'address',
+          label: 'Address',
+          placeholder: 'Where do you live?',
+          icon: 'home',
+          horizontal: true,
+        },
       ]"
       :form-object="formObject"
       :form-errors="formErrors"
@@ -126,6 +135,7 @@ export default {
         remember: false,
         gender: null,
         avatar: null,
+        address: null,
       },
       formErrors: {
         name: ['Invalid format!'],

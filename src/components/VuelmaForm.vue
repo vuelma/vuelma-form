@@ -21,6 +21,7 @@
         :size="field.size"
         :datatype="field.datatype"
         :label="field.label"
+        :horizontal="field.horizontal"
       ></form-control>
     </template>
   </form>
