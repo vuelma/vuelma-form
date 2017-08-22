@@ -4,34 +4,24 @@
     @submit.prevent="$emit('submit')"
   >
     <template v-for="field in fields">
-      <div
-        class="field"
+      <form-control
+        v-model="formObject[field.name]"
         :key="field.name"
-      >
-        <label
-          class="label"
-          v-if="field.label && field.type !== 'checkbox'"
-        >
-          {{ field.label }}
-        </label>
-        <form-control
-          v-model="formObject[field.name]"
-          :errors="formErrors[field.name]"
-          :input-type="field.type"
-          :name="field.name"
-          :classNames="field.classNames"
-          :placeholder="field.placeholder"
-          :disabled="field.disabled"
-          :readonly="field.readonly"
-          :icon="field.icon"
-          :rows="field.rows"
-          :options="field.options"
-          :multiple="field.multiple"
-          :size="field.size"
-          :datatype="field.datatype"
-          :label="field.label"
-        ></form-control>
-      </div>
+        :errors="formErrors[field.name]"
+        :input-type="field.type"
+        :name="field.name"
+        :classNames="field.classNames"
+        :placeholder="field.placeholder"
+        :disabled="field.disabled"
+        :readonly="field.readonly"
+        :icon="field.icon"
+        :rows="field.rows"
+        :options="field.options"
+        :multiple="field.multiple"
+        :size="field.size"
+        :datatype="field.datatype"
+        :label="field.label"
+      ></form-control>
     </template>
   </form>
 </template>

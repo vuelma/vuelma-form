@@ -1,137 +1,147 @@
 <template>
   <div
-    class="control"
-    :class="{ 'has-icons-left': hasIconsLeft, 'has-icons-right': hasIconsRight }"
+    class="field"
   >
-    <template v-if="inputType === 'textarea'">
-      <textarea
-        class="textarea"
-        :class="finalClassNames"
-        :name="name"
-        :placeholder="placeholder"
-        :value="value"
-        :disabled="disabled"
-        :readonly="readonly"
-        :rows="rows"
-        @input="handleChange"
-      ></textarea>
-    </template>
-
-    <template v-else-if="inputType === 'select'">
-      <div
-        class="select"
-        :class="finalClassNames"
-      >
-        <!-- FIXME: multiple selection not being rendered thru v-bind -->
-        <select
+    <label
+      class="label"
+      v-if="label && inputType !== 'checkbox'"
+    >
+      {{ label }}
+    </label>
+    <div
+      class="control"
+      :class="{ 'has-icons-left': hasIconsLeft, 'has-icons-right': hasIconsRight }"
+    >
+      <template v-if="inputType === 'textarea'">
+        <textarea
+          class="textarea"
+          :class="finalClassNames"
+          :name="name"
+          :placeholder="placeholder"
           :value="value"
-          :multiple="multiple"
-          :size="multiple ? size : null"
+          :disabled="disabled"
+          :readonly="readonly"
+          :rows="rows"
           @input="handleChange"
-        >
-          <option
-            disabled
-            selected
-            value=""
-            v-if="!!placeholder"
-            v-text="placeholder"
-          ></option>
-          <option
-            v-for="option in options"
-            v-text="option.label"
-            :value="option.value"
-            :key="option.value"
-          ></option>
-        </select>
-      </div>
+        ></textarea>
+      </template>
 
-      <div class="icon is-left" v-if="hasIconsLeft">
-        <i :class="`fa fa-${iconLeft}`"></i>
-      </div>
-    </template>
-
-    <template v-else-if="inputType === 'checkbox'">
-      <label class="checkbox">
-        <input
-          type="checkbox"
-          :checked="value"
-          @change="handleChange"
+      <template v-else-if="inputType === 'select'">
+        <div
+          class="select"
+          :class="finalClassNames"
         >
-        {{ label }}
-      </label>
-    </template>
+          <!-- FIXME: multiple selection not being rendered thru v-bind -->
+          <select
+            :value="value"
+            :multiple="multiple"
+            :size="multiple ? size : null"
+            @input="handleChange"
+          >
+            <option
+              disabled
+              selected
+              value=""
+              v-if="!!placeholder"
+              v-text="placeholder"
+            ></option>
+            <option
+              v-for="option in options"
+              v-text="option.label"
+              :value="option.value"
+              :key="option.value"
+            ></option>
+          </select>
+        </div>
 
-    <template v-else-if="inputType === 'radio'">
-      <template v-for="option in options">
-        <label
-          class="radio"
-          :key="option.name"
-          :disabled="option.disabled"
-        >
+        <div class="icon is-left" v-if="hasIconsLeft">
+          <i :class="`fa fa-${iconLeft}`"></i>
+        </div>
+      </template>
+
+      <template v-else-if="inputType === 'checkbox'">
+        <label class="checkbox">
           <input
-            type="radio"
-            :name="name"
-            :value="option.value"
-            :checked="value === option.value"
-            :disabled="option.disabled"
+            type="checkbox"
+            :checked="value"
             @change="handleChange"
           >
-          {{ option.label }}
+          {{ label }}
         </label>
       </template>
-    </template>
 
-    <template v-else-if="inputType === 'file'">
-      <div class="file" :class="finalClassNames">
-      <label class="file-label">
-        <input
-          type="file"
-          class="file-input"
-          :name="name"
-          @change="handleChange"
-        >
-        <span class="file-cta">
-          <span class="file-icon">
-            <i :class="`fa fa-${iconLeft || 'upload'}`"></i>
+      <template v-else-if="inputType === 'radio'">
+        <template v-for="option in options">
+          <label
+            class="radio"
+            :key="option.name"
+            :disabled="option.disabled"
+          >
+            <input
+              type="radio"
+              :name="name"
+              :value="option.value"
+              :checked="value === option.value"
+              :disabled="option.disabled"
+              @change="handleChange"
+            >
+            {{ option.label }}
+          </label>
+        </template>
+      </template>
+
+      <template v-else-if="inputType === 'file'">
+        <div class="file" :class="finalClassNames">
+        <label class="file-label">
+          <input
+            type="file"
+            class="file-input"
+            :name="name"
+            @change="handleChange"
+          >
+          <span class="file-cta">
+            <span class="file-icon">
+              <i :class="`fa fa-${iconLeft || 'upload'}`"></i>
+            </span>
+            <span class="file-label" v-text="placeholder"></span>
           </span>
-          <span class="file-label" v-text="placeholder"></span>
-        </span>
-        <span
-          class="file-name"
-          v-if="!!value"
-          v-text="value.name"
-        ></span>
-      </label>
+          <span
+            class="file-name"
+            v-if="!!value"
+            v-text="value.name"
+          ></span>
+        </label>
+      </div>
+      </template>
+
+      <template v-else>
+        <input
+          class="input"
+          :class="finalClassNames"
+          :type="inputType"
+          :name="name"
+          :placeholder="placeholder"
+          :value="value"
+          :disabled="disabled"
+          :readonly="readonly"
+          @input="handleChange"
+        >
+      </template>
+
+      <span class="icon is-left" v-if="hasIconsLeft">
+        <i :class="`fa fa-${iconLeft}`"></i>
+      </span>
+      <span class="icon is-right" v-if="hasIconsRight">
+        <i :class="`fa fa-${iconRight}`"></i>
+      </span>
+
+      <p
+        class="help is-danger"
+        v-for="error in errors"
+        v-text="error"
+        :key="error"
+      ></p>
     </div>
-    </template>
-
-    <template v-else>
-      <input
-        class="input"
-        :class="finalClassNames"
-        :type="inputType"
-        :name="name"
-        :placeholder="placeholder"
-        :value="value"
-        :disabled="disabled"
-        :readonly="readonly"
-        @input="handleChange"
-      >
-    </template>
-
-    <span class="icon is-left" v-if="hasIconsLeft">
-      <i :class="`fa fa-${iconLeft}`"></i>
-    </span>
-    <span class="icon is-right" v-if="hasIconsRight">
-      <i :class="`fa fa-${iconRight}`"></i>
-    </span>
-
-    <p
-      class="help is-danger"
-      v-for="error in errors"
-      v-text="error"
-      :key="error"
-    ></p>
   </div>
 </template>
 
