@@ -1,7 +1,10 @@
 <template>
   <div
     class="field"
-    :class="{ 'is-horizontal': horizontal }"
+    :class="{
+      'is-horizontal': horizontal,
+      'has-addons': hasAddonsLeft || hasAddonsRight,
+    }"
   >
     <optional-root :show="horizontal">
       <div class="field-label" :class="fieldLabelClassName">
@@ -276,6 +279,14 @@ export default {
      * Determine whether the form is horizontal or not.
      */
     horizontal: Boolean,
+
+    /**
+     * The form addons to attach to the form control.
+     */
+    addons: {
+      type: [Object, Array],
+      default: null,
+    },
   },
   computed: {
     hasIconsLeft() {
@@ -329,6 +340,12 @@ export default {
       }
 
       return 'is-normal';
+    },
+    hasAddonsLeft() {
+      return this.addons && (typeof this.addons === 'object' || !!this.addons.left);
+    },
+    hasAddonsRight() {
+      return this.addons && (typeof this.addons === 'object' && !!this.addons.right);
     },
   },
   methods: {

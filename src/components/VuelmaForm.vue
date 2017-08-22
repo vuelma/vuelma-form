@@ -22,6 +22,7 @@
         :datatype="field.datatype"
         :label="field.label"
         :horizontal="field.horizontal"
+        :addons="field.addons"
       ></form-control>
     </template>
   </form>

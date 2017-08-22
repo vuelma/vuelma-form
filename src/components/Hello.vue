@@ -16,11 +16,30 @@
           name: 'email',
           label: 'E-mail Address',
           placeholder: 'E-mail Address',
-          disabled: true,
-          classNames: 'is-medium',
-          icon: {
-            left: 'envelope',
-            right: 'check',
+          icon: 'envelope',
+          addons: {
+            left: {
+            type: 'select',
+            name: 'currency',
+            options: [
+              {
+                value: 1,
+                label: 'PH',
+              },
+              {
+                value: 2,
+                label: 'JP',
+              },
+              {
+                value: 3,
+                label: 'CH',
+              },
+            ],
+            datatype: Number,
+          },
+            right: {
+
+            },
           },
         },
         {
@@ -128,6 +147,7 @@ export default {
       formObject: {
         name: null,
         email: null,
+        email_suffix: '@icloud.com',
         password: null,
         phone_number: null,
         comments: null,
@@ -136,6 +156,7 @@ export default {
         gender: null,
         avatar: null,
         address: null,
+        currency: null,
       },
       formErrors: {
         name: ['Invalid format!'],
