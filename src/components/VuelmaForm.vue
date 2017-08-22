@@ -5,24 +5,10 @@
   >
     <template v-for="field in fields">
       <form-control
+        v-bind="field"
         v-model="formObject[field.name]"
         :key="field.name"
         :errors="formErrors[field.name]"
-        :input-type="field.type"
-        :name="field.name"
-        :classNames="field.classNames"
-        :placeholder="field.placeholder"
-        :disabled="field.disabled"
-        :readonly="field.readonly"
-        :icon="field.icon"
-        :rows="field.rows"
-        :options="field.options"
-        :multiple="field.multiple"
-        :size="field.size"
-        :datatype="field.datatype"
-        :label="field.label"
-        :horizontal="field.horizontal"
-        :addons="field.addons"
       ></form-control>
     </template>
   </form>

@@ -10,7 +10,7 @@
       <div class="field-label" :class="fieldLabelClassName">
         <label
           class="label"
-          v-if="label && inputType !== 'checkbox'"
+          v-if="label && type !== 'checkbox'"
         >
           {{ label }}
         </label>
@@ -25,29 +25,23 @@
               class="control"
               :class="{ 'has-icons-left': hasIconsLeft, 'has-icons-right': hasIconsRight }"
             >
-              <template v-if="inputType === 'textarea'">
+              <template v-if="type === 'textarea'">
                 <textarea
                   class="textarea"
+                  v-bind="$props"
                   :class="finalClassNames"
-                  :name="name"
-                  :placeholder="placeholder"
-                  :value="value"
-                  :disabled="disabled"
-                  :readonly="readonly"
-                  :rows="rows"
                   @input="handleChange"
                 ></textarea>
               </template>
 
-              <template v-else-if="inputType === 'select'">
+              <template v-else-if="type === 'select'">
                 <div
                   class="select"
                   :class="finalClassNames"
                 >
                   <!-- FIXME: multiple selection not being rendered thru v-bind -->
                   <select
-                    :value="value"
-                    :multiple="multiple"
+                    v-bind="$props"
                     :size="multiple ? size : null"
                     @input="handleChange"
                   >
@@ -72,7 +66,7 @@
                 </div>
               </template>
 
-              <template v-else-if="inputType === 'checkbox'">
+              <template v-else-if="type === 'checkbox'">
                 <label class="checkbox">
                   <input
                     type="checkbox"
@@ -83,7 +77,7 @@
                 </label>
               </template>
 
-              <template v-else-if="inputType === 'radio'">
+              <template v-else-if="type === 'radio'">
                 <template v-for="option in options">
                   <label
                     class="radio"
@@ -93,8 +87,8 @@
                     <input
                       type="radio"
                       :name="name"
-                      :value="option.value"
                       :checked="value === option.value"
+                      :value="option.value"
                       :disabled="option.disabled"
                       @change="handleChange"
                     >
@@ -103,7 +97,7 @@
                 </template>
               </template>
 
-              <template v-else-if="inputType === 'file'">
+              <template v-else-if="type === 'file'">
                 <div class="file" :class="finalClassNames">
                 <label class="file-label">
                   <input
@@ -130,13 +124,8 @@
               <template v-else>
                 <input
                   class="input"
+                  v-bind="$props"
                   :class="finalClassNames"
-                  :type="inputType"
-                  :name="name"
-                  :placeholder="placeholder"
-                  :value="value"
-                  :disabled="disabled"
-                  :readonly="readonly"
                   @input="handleChange"
                 >
               </template>
@@ -190,7 +179,7 @@ export default {
     /**
      * The input/field type of the component.
      */
-    inputType: {
+    type: {
       type: String,
       default: 'text',
     },
@@ -351,13 +340,13 @@ export default {
   methods: {
     handleChange(event) {
       let value;
-      if (this.inputType === 'checkbox') {
+      if (this.type === 'checkbox') {
         this.$emit('input', event.target.checked);
 
         return;
       }
 
-      if (this.inputType === 'file') {
+      if (this.type === 'file') {
         if (event.target.files.length > 0) {
           this.$emit('input', event.target.files[0]);
 
