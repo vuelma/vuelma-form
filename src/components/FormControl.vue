@@ -106,8 +106,8 @@
                   <input
                     type="file"
                     class="file-input"
-                    v-bind="$props"
                     :id="name"
+                    :name="name"
                     @change="handleChange"
                   >
                   <span class="file-cta">
