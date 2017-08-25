@@ -1,6 +1,6 @@
 <template>
   <div
-    class="field"
+    class="VuelmaForm__FormControl field"
     :class="{
       'is-horizontal': horizontal,
       'has-addons': hasAddonsLeft || hasAddonsRight,
