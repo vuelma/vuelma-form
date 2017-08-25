@@ -136,10 +136,29 @@
           min: 1,
           max: 5,
         },
+        {
+          type: 'custom',
+          name: 'message',
+          label: 'Message',
+          placeholder: 'Insert message here...',
+        },
       ]"
       :form-object="formObject"
       :form-errors="formErrors"
-    ></vuelma-form>
+    >
+      <template scope="field" slot="message">
+        <div class="field">
+          <label class="label" v-text="field.label"></label>
+          <div class="control">
+            <textarea
+              class="textarea"
+              v-bind="field"
+              v-model="formObject.message"
+            ></textarea>
+          </div>
+        </div>
+      </template>
+    </vuelma-form>
   </div>
 </template>
 
@@ -167,6 +186,7 @@ export default {
         address: null,
         currency: null,
         weight: null,
+        message: null,
       },
       formErrors: {
         name: ['Invalid format!'],

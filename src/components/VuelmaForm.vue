@@ -4,12 +4,20 @@
     @submit.prevent="$emit('submit')"
   >
     <template v-for="field in fields">
-      <form-control
-        v-bind="field"
-        v-model="formObject[field.name]"
-        :key="field.name"
-        :errors="formErrors[field.name]"
-      ></form-control>
+      <span :key="field.name">
+        <slot
+          v-if="field.type === 'custom'"
+          v-bind="field"
+          :name="'message'"
+        ></slot>
+
+        <form-control
+          v-else
+          v-bind="field"
+          v-model="formObject[field.name]"
+          :errors="formErrors[field.name]"
+        ></form-control>
+      </span>
     </template>
   </form>
 </template>
