@@ -31,7 +31,7 @@
                   v-bind="$props"
                   :id="name"
                   :class="finalClassNames"
-                  :maxlength="maxlength === 255 ? 0 : maxlength"
+                  :maxlength="maxlength === 255 ? null : maxlength"
                   @input="handleChange"
                 ></textarea>
               </template>
@@ -192,10 +192,7 @@ export default {
     /**
      * The form errors associated with the component.
      */
-    errors: {
-      type: Array,
-      default: () => ([]),
-    },
+    errors: Array,
 
     /**
      * The datatype of the emitted value.
@@ -225,7 +222,7 @@ export default {
      */
     classNames: {
       type: [String, Array],
-      default: () => ([]),
+      default: '',
     },
 
     /**
@@ -251,10 +248,7 @@ export default {
     /**
      * The array containing the options for the select/radio control.
      */
-    options: {
-      type: Array,
-      default: () => ([]),
-    },
+    options: Array,
 
     /**
      * Determine whether the select is multiple or not.
@@ -264,10 +258,7 @@ export default {
     /**
      * The size of the displayed items on "multiple" select control
      */
-    size: {
-      type: Number,
-      default: 5,
-    },
+    size: Number,
 
     /**
      * Determine whether the form is horizontal or not.
@@ -277,10 +268,7 @@ export default {
     /**
      * The form addons to attach to the form control.
      */
-    addons: {
-      type: [Object, Array],
-      default: null,
-    },
+    addons: [Object, Array],
 
     /**
      * The maximum number of characters allowable on a field.
@@ -313,7 +301,7 @@ export default {
       return this.icon.right;
     },
     hasErrors() {
-      return this.errors.length > 0;
+      return this.errors && this.errors.length > 0;
     },
     finalClassNames() {
       const classNames = (typeof this.classNames === 'string') ? this.classNames.split(' ') : this.classNames;
