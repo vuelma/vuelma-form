@@ -29,6 +29,7 @@
                 <textarea
                   class="textarea"
                   v-bind="$props"
+                  :id="name"
                   :class="finalClassNames"
                   @input="handleChange"
                 ></textarea>
@@ -42,6 +43,7 @@
                   <!-- FIXME: multiple selection not being rendered thru v-bind -->
                   <select
                     v-bind="$props"
+                    :id="name"
                     :size="multiple ? size : null"
                     @input="handleChange"
                   >
@@ -70,6 +72,7 @@
                 <label class="checkbox">
                   <input
                     type="checkbox"
+                    :id="name"
                     :checked="value"
                     @change="handleChange"
                   >
@@ -78,7 +81,7 @@
               </template>
 
               <template v-else-if="type === 'radio'">
-                <template v-for="option in options">
+                <template v-for="(option, index) in options">
                   <label
                     class="radio"
                     :key="option.name"
@@ -86,10 +89,9 @@
                   >
                     <input
                       type="radio"
-                      :name="name"
+                      v-bind="option"
+                      :id="`${name}${index}`"
                       :checked="value === option.value"
-                      :value="option.value"
-                      :disabled="option.disabled"
                       @change="handleChange"
                     >
                     {{ option.label }}
@@ -103,7 +105,8 @@
                   <input
                     type="file"
                     class="file-input"
-                    :name="name"
+                    v-bind="$props"
+                    :id="name"
                     @change="handleChange"
                   >
                   <span class="file-cta">
@@ -125,6 +128,7 @@
                 <input
                   class="input"
                   v-bind="$props"
+                  :id="name"
                   :class="finalClassNames"
                   @input="handleChange"
                 >
