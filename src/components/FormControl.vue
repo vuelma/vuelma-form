@@ -31,6 +31,7 @@
                   v-bind="$props"
                   :id="name"
                   :class="finalClassNames"
+                  :maxlength="maxlength === 255 ? 0 : maxlength"
                   @input="handleChange"
                 ></textarea>
               </template>
@@ -279,6 +280,14 @@ export default {
     addons: {
       type: [Object, Array],
       default: null,
+    },
+
+    /**
+     * The maximum number of characters allowable on a field.
+     */
+    maxlength: {
+      type: Number,
+      default: 255,
     },
   },
   computed: {
