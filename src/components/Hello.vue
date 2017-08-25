@@ -56,7 +56,6 @@
           label: 'Phone Number',
           placeholder: 'Phone Number',
           classNames: ['is-info'],
-          datatype: Number,
         },
         {
           type: 'textarea',
@@ -127,6 +126,16 @@
           icon: 'home',
           horizontal: true,
         },
+        {
+          type: 'number',
+          name: 'weight',
+          label: 'weight',
+          placeholder: '0.00',
+          icon: 'user',
+          datatype: Number,
+          min: 1,
+          max: 5,
+        },
       ]"
       :form-object="formObject"
       :form-errors="formErrors"
@@ -152,11 +161,12 @@ export default {
         phone_number: null,
         comments: null,
         country: null,
-        remember: false,
+        remember: null,
         gender: null,
         avatar: null,
         address: null,
         currency: null,
+        weight: null,
       },
       formErrors: {
         name: ['Invalid format!'],
