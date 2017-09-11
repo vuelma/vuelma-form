@@ -17,7 +17,7 @@
   "bugs": "https://github.com/vuelma/vuelma-form/issues",
   "license": "MIT",
   "author": "Adriel P. de Guzman <adrielpdeguzman@users.noreply.github.com>",
-  "main": "index.js",
+  "main": "./src/components/VuelmaForm.vue",
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
