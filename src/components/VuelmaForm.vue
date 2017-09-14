@@ -1,5 +1,5 @@
 <template>
-  <form class="VuelmaForm">
+  <form class="VuelmaForm" @submit.prevent="$emit('submit', formObject)">
     <template v-for="field in fields">
       <span :key="field.name">
         <slot
@@ -13,9 +13,11 @@
           v-bind="field"
           v-model="formObject[field.name]"
           :errors="formErrors[field.name]"
+          :disabled="disabled"
         ></form-control>
       </span>
     </template>
+    <slot></slot>
   </form>
 </template>
 
@@ -47,7 +49,15 @@ export default {
     /**
      * The object containing form (validation) errors.
      */
-    formErrors: Object,
+    formErrors: {
+      type: Object,
+      default: () => ({}),
+    },
+
+    /**
+     * Disable the entire form.
+     */
+    disabled: Boolean,
   },
 };
 </script>
