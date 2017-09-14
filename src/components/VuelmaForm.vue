@@ -16,6 +16,7 @@
         ></form-control>
       </span>
     </template>
+    <slot></slot>
   </form>
 </template>
 
