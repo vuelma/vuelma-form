@@ -1,5 +1,5 @@
 <template>
-  <form class="VuelmaForm">
+  <form class="VuelmaForm" @submit.prevent="$emit('submit', formObject)">
     <template v-for="field in fields">
       <span :key="field.name">
         <slot
