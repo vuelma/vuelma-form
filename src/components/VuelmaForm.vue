@@ -47,7 +47,10 @@ export default {
     /**
      * The object containing form (validation) errors.
      */
-    formErrors: Object,
+    formErrors: {
+      type: Object,
+      default: () => ({}),
+    },
   },
 };
 </script>
