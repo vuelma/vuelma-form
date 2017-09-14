@@ -70,11 +70,12 @@
               </template>
 
               <template v-else-if="type === 'checkbox'">
-                <label class="checkbox">
+                <label class="checkbox" :disabled="disabled">
                   <input
                     type="checkbox"
                     :id="name"
                     :checked="value"
+                    :disabled="disabled"
                     @change="handleChange"
                   >
                   {{ label }}
@@ -86,13 +87,14 @@
                   <label
                     class="radio"
                     :key="option.name"
-                    :disabled="option.disabled"
+                    :disabled="option.disabled || disabled"
                   >
                     <input
                       type="radio"
                       v-bind="option"
                       :id="`${name}${index}`"
                       :checked="value === option.value"
+                      :disabled="option.disabled || disabled"
                       @change="handleChange"
                     >
                     {{ option.label }}

@@ -13,6 +13,7 @@
           v-bind="field"
           v-model="formObject[field.name]"
           :errors="formErrors[field.name]"
+          :disabled="disabled"
         ></form-control>
       </span>
     </template>
@@ -52,6 +53,11 @@ export default {
       type: Object,
       default: () => ({}),
     },
+
+    /**
+     * Disable the entire form.
+     */
+    disabled: Boolean,
   },
 };
 </script>
