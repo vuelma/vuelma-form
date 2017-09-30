@@ -6,7 +6,12 @@
       :field="field"
       :value="formObject[field.name]"
       :errors="formErrors[field.name]"
-    ></field>
+    >
+      <slot
+        v-bind="field"
+        :name="field.name"
+      ></slot>
+    </field>
   </form>
 </template>
 
