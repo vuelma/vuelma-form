@@ -8,7 +8,7 @@ export default {
      * The bound data from the form component.
      */
     value: {
-      type: [String, Number, Array, Boolean, File],
+      type: [String, Number, Array, Boolean, File, FileList],
       reqiured: true,
     },
 
