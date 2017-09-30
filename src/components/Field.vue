@@ -1,29 +1,52 @@
 <template>
   <div class="VuelmaForm__field field">
-    <component
-      :is="control"
-      v-bind="field"
-      :value="value"
-      :errors="errors"
-    ></component>
+    <label
+      class="label"
+      v-if="shouldDisplayLabel"
+      v-text="field.label"
+      :for="field.name"
+    ></label>
+
+    <div class="conrol">
+      <component
+        :is="controlType"
+        v-bind="field"
+        :value="value"
+        :errors="errors"
+      ></component>
+    </div>
   </div>
 </template>
 
 <script>
 import InputControl from './Input';
+import TextareaControl from './Textarea';
+import SelectControl from './Select';
+import CheckboxControl from './Checkbox';
 
 export default {
   name: 'vuelma-field',
   components: {
     InputControl,
+    TextareaControl,
+    SelectControl,
+    CheckboxControl,
   },
   props: ['field', 'value', 'errors'],
   computed: {
-    control() {
+    controlType() {
       switch (this.field.type) {
-        default:
+        case 'text':
+        case 'password':
+        case 'email':
+        case 'tel':
           return 'input-control';
+        default:
+          return `${this.field.type}-control`;
       }
+    },
+    shouldDisplayLabel() {
+      return (this.field.type !== 'checkbox');
     },
   },
 };
