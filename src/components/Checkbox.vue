@@ -1,7 +1,6 @@
 <template>
-  <label class="checkbox">
+  <label class="VuelmaForm__checkbox checkbox">
     <input
-      class="VuelmaForm__input"
       v-bind="$props"
       :id="name"
       @change="input"
@@ -15,7 +14,7 @@ import Control from './Control';
 import bus from '../utils/bus';
 
 export default {
-  name: 'input-control',
+  name: 'checkbox-control',
   extends: Control,
   props: {
     /**

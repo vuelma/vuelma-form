@@ -1,5 +1,5 @@
 <template>
-  <div class="select">
+  <div class="VuelmaForm__select select">
     <select
       v-bind="$props"
       :id="name"
