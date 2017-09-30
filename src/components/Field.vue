@@ -9,13 +9,21 @@
         {{ label | snakeToTitle }}
       </label>
 
-      <div class="conrol">
+      <div class="control">
         <component
           :is="controlType"
           v-bind="field"
+          :class="modifiers"
           :value="value"
         ></component>
       </div>
+
+      <p
+        class="help is-danger"
+        v-for="error in errors"
+        v-text="error"
+        :key="error"
+      ></p>
     </slot>
   </div>
 </template>
@@ -62,6 +70,20 @@ export default {
       }
 
       return this.field.label;
+    },
+    modifiers() {
+      let modifiers;
+      if (typeof this.field.modifiers === 'string') {
+        modifiers = [this.field.modifiers];
+      } else {
+        modifiers = [].concat(this.field.modifiers);
+      }
+
+      if (this.errors) {
+        modifiers.push('is-danger');
+      }
+
+      return modifiers;
     },
   },
 };

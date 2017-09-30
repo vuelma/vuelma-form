@@ -27,6 +27,14 @@ export default {
       type: String,
       required: true,
     },
+
+    /**
+     * The custom classes that will be used for the control.
+     */
+    modifiers: {
+      type: [Array, String],
+      default: () => ([]),
+    },
   },
   methods: {
     /**
