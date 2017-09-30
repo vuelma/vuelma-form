@@ -1,5 +1,5 @@
 <template>
-  <div class="VuelmaForm__select select">
+  <div class="VuelmaForm__select select" :class="{ 'is-loading': loading }">
     <select
       :id="name"
       :name="name"
@@ -44,6 +44,14 @@ export default {
      * The placeholder label for the default option.
      */
     placeholder: String,
+
+    /**
+     * Attach loading state to select control.
+     */
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
