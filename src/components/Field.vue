@@ -12,7 +12,6 @@
         :is="controlType"
         v-bind="field"
         :value="value"
-        :errors="errors"
       ></component>
     </div>
   </div>
@@ -23,6 +22,7 @@ import InputControl from './Input';
 import TextareaControl from './Textarea';
 import SelectControl from './Select';
 import CheckboxControl from './Checkbox';
+import RadioControl from './Radio';
 
 export default {
   name: 'vuelma-field',
@@ -31,6 +31,7 @@ export default {
     TextareaControl,
     SelectControl,
     CheckboxControl,
+    RadioControl,
   },
   props: ['field', 'value', 'errors'],
   computed: {
