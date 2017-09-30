@@ -11,10 +11,11 @@
 
       <div class="control" :class="controlModifiers">
         <component
-          :is="controlType"
           v-bind="field"
+          :is="controlType"
           :class="modifiers"
           :value="value"
+          :disabled="disabled"
         ></component>
       </div>
 
@@ -75,6 +76,14 @@ export default {
      * Append the is-loading modifier to control.
      */
     loading: Boolean,
+
+    /**
+     * Disable the form control.
+     */
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     controlType() {
