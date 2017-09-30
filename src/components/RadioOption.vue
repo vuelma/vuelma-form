@@ -14,7 +14,7 @@
 import Control from './Control';
 
 export default {
-  name: 'radio-control',
+  name: 'radio-option',
   extends: Control,
   props: {
     /**

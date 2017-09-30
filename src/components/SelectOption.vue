@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'option-control',
+  name: 'select-option',
   props: {
     /**
      * The value associated with the option.

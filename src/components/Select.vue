@@ -5,17 +5,17 @@
       :name="name"
       @input="input"
     >
-      <option-control
+      <select-option
         disabled
         selected
         :label="placeholder"
         value=""
-      ></option-control>
-      <option-control
+      ></select-option>
+      <select-option
         v-for="option in options"
         :key="option.value"
         v-bind="option"
-      ></option-control>
+      ></select-option>
     </select>
   </div>
   </div>
@@ -23,13 +23,13 @@
 
 <script>
 import Control from './Control';
-import OptionControl from './Option';
+import SelectOption from './SelectOption';
 
 export default {
   name: 'select-control',
   extends: Control,
   components: {
-    OptionControl,
+    SelectOption,
   },
   props: {
     /**
