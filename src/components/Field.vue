@@ -23,6 +23,7 @@ import TextareaControl from './Textarea';
 import SelectControl from './Select';
 import CheckboxControl from './Checkbox';
 import RadioControl from './Radio';
+import FileControl from './File';
 
 export default {
   name: 'vuelma-field',
@@ -32,6 +33,7 @@ export default {
     SelectControl,
     CheckboxControl,
     RadioControl,
+    FileControl,
   },
   props: ['field', 'value', 'errors'],
   computed: {
