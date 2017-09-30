@@ -1,19 +1,22 @@
 <template>
   <div class="VuelmaForm__field field">
-    <label
-      class="label"
-      v-if="shouldDisplayLabel"
-      v-text="field.label"
-      :for="field.name"
-    ></label>
+    <slot>
+      <label
+        class="label"
+        v-if="shouldDisplayLabel"
+        :for="field.name"
+      >
+        {{ label | snakeToTitle }}
+      </label>
 
-    <div class="conrol">
-      <component
-        :is="controlType"
-        v-bind="field"
-        :value="value"
-      ></component>
-    </div>
+      <div class="conrol">
+        <component
+          :is="controlType"
+          v-bind="field"
+          :value="value"
+        ></component>
+      </div>
+    </slot>
   </div>
 </template>
 
@@ -52,6 +55,13 @@ export default {
     },
     shouldDisplayLabel() {
       return (this.field.type !== 'checkbox');
+    },
+    label() {
+      if (this.field.label === undefined) {
+        return this.field.name;
+      }
+
+      return this.field.label;
     },
   },
 };
