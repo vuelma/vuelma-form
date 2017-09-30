@@ -3,6 +3,7 @@
     <select
       :id="name"
       :name="name"
+      :value="value"
       @input="input"
     >
       <select-option

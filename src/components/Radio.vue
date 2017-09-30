@@ -6,6 +6,7 @@
       :key="option.value"
       :name="name"
       :type="type"
+      :checked="option.value === value"
     ></radio-option>
   </div>
 </template>

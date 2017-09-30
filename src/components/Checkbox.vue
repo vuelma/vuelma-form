@@ -3,6 +3,7 @@
     <input
       v-bind="$props"
       :id="name"
+      :checked="value"
       @change="input"
     >
     {{ label }}
@@ -24,6 +25,11 @@ export default {
       type: String,
       required: true,
     },
+
+    /**
+     * Native HTML attributes for checkbox.
+     */
+    disabled: Boolean,
   },
   methods: {
     /**
