@@ -39,6 +39,11 @@ export default {
       type: String,
       default: 'upload',
     },
+
+    /**
+     * Return array of files instead of FileList.
+     */
+    isArray: Boolean,
   },
   computed: {
     filename() {
@@ -54,9 +59,10 @@ export default {
      * Handle the change input value event.
      */
     input(event) {
+      const { name, files: value } = event.target;
       bus.$emit('update:model', {
-        name: event.target.name,
-        value: [...event.target.files],
+        name,
+        value: this.isArray ? [...value] : value,
       });
     },
   },

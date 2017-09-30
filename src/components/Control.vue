@@ -33,10 +33,8 @@ export default {
      * Handle the change input value event.
      */
     input(event) {
-      bus.$emit('update:model', {
-        name: event.target.name,
-        value: event.target.value,
-      });
+      const { name, value } = event.target;
+      bus.$emit('update:model', { name, value });
     },
   },
 };
