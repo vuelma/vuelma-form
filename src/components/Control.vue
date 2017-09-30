@@ -29,6 +29,9 @@ export default {
     },
   },
   methods: {
+    /**
+     * Handle the change input value event.
+     */
     input(event) {
       bus.$emit('update:model', {
         name: event.target.name,
