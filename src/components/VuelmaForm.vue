@@ -6,6 +6,7 @@
       :field="field"
       :value="formObject[field.name]"
       :errors="formErrors[field.name]"
+      :loading="field.loading"
     >
       <slot
         v-bind="field"

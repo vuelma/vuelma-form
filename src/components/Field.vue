@@ -9,7 +9,7 @@
         {{ label | snakeToTitle }}
       </label>
 
-      <div class="control">
+      <div class="control" :class="controlModifiers">
         <component
           :is="controlType"
           v-bind="field"
@@ -48,7 +48,34 @@ export default {
     FileControl,
     NumberControl,
   },
-  props: ['field', 'value', 'errors'],
+  props: {
+    /**
+     * The metadata of the field component.
+     */
+    field: {
+      type: Object,
+      required: true,
+    },
+
+    /**
+     * The value associated with the control.
+     */
+    value: {
+      required: true,
+    },
+
+    /**
+     * The errors associated with the field.
+     */
+    errors: {
+      type: Array,
+    },
+
+    /**
+     * Append the is-loading modifier to control.
+     */
+    loading: Boolean,
+  },
   computed: {
     controlType() {
       switch (this.field.type) {
@@ -84,6 +111,25 @@ export default {
       }
 
       return modifiers;
+    },
+    controlModifiers() {
+      const controlModifiers = [];
+
+      if (this.loading) {
+        controlModifiers.push('is-loading');
+
+        if (this.modifiers.includes('is-small')) {
+          controlModifiers.push('is-small');
+        } else if (this.modifiers.includes('is-medium')) {
+          controlModifiers.push('is-medium');
+        } else if (this.modifiers.includes('is-large')) {
+          controlModifiers.push('is-large');
+        } else {
+          controlModifiers.push('is-normal');
+        }
+      }
+
+      return controlModifiers;
     },
   },
 };
