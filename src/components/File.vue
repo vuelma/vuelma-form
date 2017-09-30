@@ -9,7 +9,7 @@
         @change="input"
       >
       <span class="file-cta">
-        <span class="file-icon">
+        <span class="file-icon" v-if="hasIcon">
           <i class="fa" :class="`fa-${icon}`"></i>
         </span>
         <span class="file-label" v-text="placeholder"></span>
@@ -36,7 +36,7 @@ export default {
      * The font-awesome icon to be used for upload button.
      */
     icon: {
-      type: String,
+      type: [String, Boolean],
       default: 'upload',
     },
 
@@ -52,6 +52,9 @@ export default {
       }
 
       return this.value[0].name;
+    },
+    hasIcon() {
+      return this.icon;
     },
   },
   methods: {
