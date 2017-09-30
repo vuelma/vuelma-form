@@ -17,6 +17,17 @@
           :value="value"
           :disabled="disabled"
         ></component>
+
+        <icon-component
+          class="is-left"
+          v-if="hasIconsLeft"
+          :name="field.iconLeft || field.icon"
+        ></icon-component>
+        <icon-component
+          class="is-right"
+          v-if="hasIconsRight"
+          :name="field.iconRight"
+        ></icon-component>
       </div>
 
       <p
@@ -37,6 +48,7 @@ import CheckboxControl from './Checkbox';
 import RadioControl from './Radio';
 import FileControl from './File';
 import NumberControl from './Number';
+import IconComponent from './Icon';
 
 export default {
   name: 'vuelma-field',
@@ -48,6 +60,7 @@ export default {
     RadioControl,
     FileControl,
     NumberControl,
+    IconComponent,
   },
   props: {
     /**
@@ -138,7 +151,21 @@ export default {
         }
       }
 
+      if (this.hasIconsLeft) {
+        controlModifiers.push('has-icons-left');
+      }
+
+      if (this.hasIconsRight) {
+        controlModifiers.push('has-icons-right');
+      }
+
       return controlModifiers;
+    },
+    hasIconsLeft() {
+      return this.field.iconLeft || this.field.icon;
+    },
+    hasIconsRight() {
+      return this.field.iconRight;
     },
   },
 };
