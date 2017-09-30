@@ -1,33 +1,23 @@
 <template>
   <form class="VuelmaForm" @submit.prevent="$emit('submit', formObject)">
-    <template v-for="field in fields">
-      <span :key="field.name">
-        <slot
-          v-if="field.type === 'custom'"
-          v-bind="field"
-          :name="'message'"
-        ></slot>
-
-        <form-control
-          v-else
-          v-bind="field"
-          v-model="formObject[field.name]"
-          :errors="formErrors[field.name]"
-          :disabled="disabled"
-        ></form-control>
-      </span>
-    </template>
-    <slot></slot>
+    <field
+      v-for="field in fields"
+      :key="field.name"
+      :field="field"
+      :value="formObject[field.name]"
+      :errors="formErrors[field.name]"
+    ></field>
   </form>
 </template>
 
 <script>
-import FormControl from './FormControl';
+import Field from './Field';
+import bus from '../utils/bus';
 
 export default {
   name: 'vuelma-form',
   components: {
-    FormControl,
+    Field,
   },
   props: {
     /**
@@ -58,6 +48,14 @@ export default {
      * Disable the entire form.
      */
     disabled: Boolean,
+  },
+  mounted() {
+    bus.$on('update:model', (field) => {
+      this.$emit('update:formObject', {
+        ...this.formObject,
+        [field.name]: field.value,
+      });
+    });
   },
 };
 </script>
