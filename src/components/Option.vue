@@ -15,17 +15,6 @@ export default {
       type: [String, Boolean, Number],
       required: true,
     },
-
-    /**
-     * The text/label of the option.
-     */
-    label: String,
-
-    /**
-     * Native HTML attributes for option.
-     */
-    selected: Boolean,
-    disabled: Boolean,
   },
 };
 </script>
