@@ -1,5 +1,5 @@
 <template>
-  <label class="radio">
+  <label class="radio" :disabled="disabled">
     <input
       class="VuelmaForm__radio"
       v-bind="$props"
@@ -29,6 +29,7 @@ export default {
      * Native HTML attributes for option.
      */
     checked: Boolean,
+    disabled: Boolean,
   },
 };
 </script>
