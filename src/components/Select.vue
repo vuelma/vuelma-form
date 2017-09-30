@@ -1,8 +1,8 @@
 <template>
   <div class="VuelmaForm__select select">
     <select
-      v-bind="$props"
       :id="name"
+      :name="name"
       @input="input"
     >
       <option-control
