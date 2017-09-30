@@ -12,13 +12,6 @@ import Control from './Control';
 
 export default {
   name: 'input-control',
-  extends: {
-    props: {
-      ...Control.props,
-    },
-    methods: {
-      ...Control.methods,
-    },
-  },
+  extends: Control,
 };
 </script>
