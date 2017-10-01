@@ -66,7 +66,7 @@ export default {
   },
   data() {
     return {
-      mutableValue: [],
+      mutableValue: this.value === undefined ? [] : this.value,
     };
   },
   computed: {
@@ -77,14 +77,17 @@ export default {
       };
     },
   },
+  watch: {
+    value() {
+      this.mutableValue = this.value;
+    },
+  },
   methods: {
     input(event) {
       const { name, selectedOptions, value } = event.target;
       const values = [...selectedOptions].map(option => option.value);
-      const mutableValue = this.multiple ? values : value;
 
-      this.mutableValue = mutableValue;
-      bus.$emit('update:model', { name, value: mutableValue });
+      bus.$emit('update:model', { name, value: this.multiple ? values : value });
     },
   },
 };
