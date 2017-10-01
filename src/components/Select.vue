@@ -12,7 +12,7 @@
       <select-option
         disabled
         selected
-        v-if="!multiple"
+        v-if="!multiple && this.placeholder !== false"
         :label="placeholder"
         value=""
       ></select-option>
@@ -47,7 +47,10 @@ export default {
     /**
      * The placeholder label for the default option.
      */
-    placeholder: String,
+    placeholder: {
+      type: [String, Boolean],
+      default: false,
+    },
 
     /**
      * Attach loading state to select control.
