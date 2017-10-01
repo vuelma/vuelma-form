@@ -5,6 +5,18 @@ import App from './App';
 
 Vue.config.productionTip = false;
 
+/**
+ * Converts a snake case string to title case.
+ *
+ * @param  {String} value the string to convert
+ * @return {String}
+ */
+Vue.filter('snakeToTitle', value => (
+  value.split('_').map(char => (
+    char.charAt(0).toUpperCase() + char.substring(1)
+  )).join(' ')
+));
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
