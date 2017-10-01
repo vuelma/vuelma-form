@@ -47,6 +47,13 @@ export default {
      */
     input(event) {
       const { name, value } = event.target;
+      this.emit(name, value);
+    },
+
+    /**
+     * Emit the update event from the parent.
+     */
+    emit(name, value) {
       bus.$emit('update:model', { name, value });
     },
   },
