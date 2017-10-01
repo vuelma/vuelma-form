@@ -7,9 +7,11 @@
           name: 'name',
           label: 'Full Name',
           placeholder: 'Name',
-          classNames: ['is-primary', 'is-large'],
-          icon: 'user',
+          modifiers: ['is-primary', 'is-large', 'is-loading'],
+          iconLeft: 'user',
+          iconRight: 'warning',
           horizontal: true,
+          loading: true,
         },
         {
           type: 'email',
@@ -17,37 +19,12 @@
           label: 'E-mail Address',
           placeholder: 'E-mail Address',
           icon: 'envelope',
-          addons: {
-            left: {
-            type: 'select',
-            name: 'currency',
-            options: [
-              {
-                value: 1,
-                label: 'PH',
-              },
-              {
-                value: 2,
-                label: 'JP',
-              },
-              {
-                value: 3,
-                label: 'CH',
-              },
-            ],
-            datatype: Number,
-          },
-            right: {
-
-            },
-          },
         },
         {
           type: 'password',
           name: 'password',
-          label: 'Password',
           placeholder: 'Password',
-          classNames: 'is-small',
+          modifiers: 'is-small is-static',
           readonly: true,
         },
         {
@@ -55,7 +32,8 @@
           name: 'phone_number',
           label: 'Phone Number',
           placeholder: 'Phone Number',
-          classNames: ['is-info'],
+          modifiers: ['is-info'],
+          disabled: true,
         },
         {
           type: 'textarea',
@@ -67,7 +45,6 @@
         {
           type: 'select',
           name: 'country',
-          label: 'Country',
           options: [
             {
               value: 1,
@@ -83,7 +60,30 @@
             },
           ],
           placeholder: 'Country',
-          datatype: Number,
+          icon: 'globe',
+        },
+        {
+          type: 'select',
+          name: 'places',
+          options: [
+            {
+              value: 1,
+              label: 'School',
+            },
+            {
+              value: 2,
+              label: 'Office',
+            },
+            {
+              value: 3,
+              label: 'Hospital',
+            },
+            {
+              value: 4,
+              label: 'Park',
+            },
+          ],
+          multiple: true,
         },
         {
           type: 'checkbox',
@@ -113,10 +113,10 @@
         {
           type: 'file',
           name: 'avatar',
-          label: 'Avatar',
-          placeholder: 'Choose a file...',
-          classNames: ['has-name', 'is-fullwidth'],
-          icon: 'user',
+          label: '',
+          placeholder: 'Choose a file',
+          modifiers: ['has-name', 'is-centered', 'is-boxed', 'is-large'],
+          icon: false,
         },
         {
           type: 'text',
@@ -132,9 +132,10 @@
           label: 'weight',
           placeholder: '0.00',
           icon: 'user',
-          datatype: Number,
-          min: 1,
-          max: 5,
+          isNumber: true,
+          min: 0.000001,
+          max: 999999999999.999999,
+          step: 0.000001,
         },
         {
           type: 'custom',
@@ -143,7 +144,7 @@
           placeholder: 'Insert message here...',
         },
       ]"
-      :form-object="formObject"
+      :form-object.sync="formObject"
       :form-errors="formErrors"
     >
       <template scope="field" slot="message">
@@ -187,6 +188,7 @@ export default {
         currency: null,
         weight: null,
         message: null,
+        places: [],
       },
       formErrors: {
         name: ['Invalid format!'],
