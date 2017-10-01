@@ -62,6 +62,7 @@ import FileControl from './File';
 import NumberControl from './Number';
 import IconComponent from './Icon';
 import OptionalRoot from '../utils/OptionalRoot';
+import snakeToTitle from '../filters/snakeToTitle';
 
 const pushSizeModifier = (modifiers, referenceModifiers) => {
   if (referenceModifiers.includes('is-small')) {
@@ -128,6 +129,9 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  filters: {
+    snakeToTitle,
   },
   computed: {
     controlType() {
