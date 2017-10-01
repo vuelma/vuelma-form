@@ -3,9 +3,9 @@
     <label class="file-label">
       <input
         class="file-input"
-        :type="type"
+        v-bind="$props"
         :id="name"
-        :name="name"
+        :value="null"
         @change="input"
       >
       <span class="file-cta">

@@ -7,6 +7,7 @@
       :name="name"
       :type="type"
       :checked="option.value === value"
+      :disabled="option.disabled || disabled"
     ></radio-option>
   </div>
 </template>

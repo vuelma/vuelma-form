@@ -35,6 +35,11 @@ export default {
       type: [Array, String],
       default: () => ([]),
     },
+
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     /**
