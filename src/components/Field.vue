@@ -1,41 +1,53 @@
 <template>
-  <div class="VuelmaForm__field field">
+  <div class="VuelmaForm__field field" :class="{ 'is-horizontal': horizontal }">
     <slot>
-      <label
-        class="label"
-        v-if="shouldDisplayLabel"
-        :for="field.name"
-      >
-        {{ label | snakeToTitle }}
-      </label>
+      <optional-root :show="horizontal">
+        <div class="field-label" :class="fieldLabelModifiers">
+          <label
+            class="label"
+            v-if="shouldDisplayLabel"
+            :for="field.name"
+          >
+            {{ label | snakeToTitle }}
+          </label>
+        </div>
+      </optional-root>
 
-      <div class="control" :class="controlModifiers">
-        <component
-          v-bind="field"
-          :is="controlType"
-          :class="modifiers"
-          :value="value"
-          :disabled="disabled"
-        ></component>
+      <optional-root :show="horizontal">
+        <div class="field-body">
+          <optional-root :show="horizontal">
+            <div class="field">
+              <div class="control" :class="controlModifiers">
+                <component
+                  v-bind="field"
+                  :is="controlType"
+                  :class="modifiers"
+                  :value="value"
+                  :disabled="disabled"
+                ></component>
 
-        <icon-component
-          class="is-left"
-          v-if="hasIconsLeft"
-          :name="field.iconLeft || field.icon"
-        ></icon-component>
-        <icon-component
-          class="is-right"
-          v-if="hasIconsRight"
-          :name="field.iconRight"
-        ></icon-component>
-      </div>
+                <icon-component
+                  class="is-left"
+                  v-if="hasIconsLeft"
+                  :name="field.iconLeft || field.icon"
+                ></icon-component>
+                <icon-component
+                  class="is-right"
+                  v-if="hasIconsRight"
+                  :name="field.iconRight"
+                ></icon-component>
+              </div>
 
-      <p
-        class="help is-danger"
-        v-for="error in errors"
-        v-text="error"
-        :key="error"
-      ></p>
+              <p
+                class="help is-danger"
+                v-for="error in errors"
+                v-text="error"
+                :key="error"
+              ></p>
+            </div>
+          </optional-root>
+        </div>
+      </optional-root>
     </slot>
   </div>
 </template>
@@ -49,6 +61,19 @@ import RadioControl from './Radio';
 import FileControl from './File';
 import NumberControl from './Number';
 import IconComponent from './Icon';
+import OptionalRoot from '../utils/OptionalRoot';
+
+const pushSizeModifier = (modifiers, referenceModifiers) => {
+  if (referenceModifiers.includes('is-small')) {
+    modifiers.push('is-small');
+  } else if (referenceModifiers.includes('is-medium')) {
+    modifiers.push('is-medium');
+  } else if (referenceModifiers.includes('is-large')) {
+    modifiers.push('is-large');
+  } else {
+    modifiers.push('is-normal');
+  }
+};
 
 export default {
   name: 'vuelma-field',
@@ -61,6 +86,7 @@ export default {
     FileControl,
     NumberControl,
     IconComponent,
+    OptionalRoot,
   },
   props: {
     /**
@@ -97,6 +123,11 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    horizontal: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     controlType() {
@@ -111,7 +142,7 @@ export default {
       }
     },
     shouldDisplayLabel() {
-      return (this.field.type !== 'checkbox');
+      return this.field.type !== 'checkbox';
     },
     label() {
       if (this.field.label === undefined) {
@@ -139,16 +170,7 @@ export default {
 
       if (this.loading) {
         controlModifiers.push('is-loading');
-
-        if (this.modifiers.includes('is-small')) {
-          controlModifiers.push('is-small');
-        } else if (this.modifiers.includes('is-medium')) {
-          controlModifiers.push('is-medium');
-        } else if (this.modifiers.includes('is-large')) {
-          controlModifiers.push('is-large');
-        } else {
-          controlModifiers.push('is-normal');
-        }
+        pushSizeModifier(controlModifiers, this.modifiers);
       }
 
       if (this.hasIconsLeft) {
@@ -160,6 +182,14 @@ export default {
       }
 
       return controlModifiers;
+    },
+    fieldLabelModifiers() {
+      const labelModifiers = [];
+      if (this.horizontal) {
+        pushSizeModifier(labelModifiers, this.modifiers);
+      }
+
+      return labelModifiers;
     },
     hasIconsLeft() {
       return this.field.iconLeft || this.field.icon;

@@ -7,6 +7,7 @@
       :value="formObject[field.name]"
       :errors="formErrors[field.name]"
       :disabled="field.disabled || disabled"
+      :horizontal="field.horizontal || horizontal"
     >
       <slot
         v-bind="field"
@@ -54,6 +55,14 @@ export default {
      * Disable the entire form.
      */
     disabled: Boolean,
+
+    /**
+     * Render the entire form with horizontal fields.
+     */
+    horizontal: {
+      type: Boolean,
+      default: false,
+    },
   },
   mounted() {
     bus.$on('update:model', (field) => {
