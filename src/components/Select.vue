@@ -1,14 +1,18 @@
 <template>
-  <div class="VuelmaForm__select select" :class="{ 'is-loading': loading }">
+  <div
+    class="VuelmaForm__select select"
+    :class="selectModifiers"
+  >
     <select
+      v-bind="$props"
+      v-model="mutableValue"
       :id="name"
-      :name="name"
-      :value="value"
       @input="input"
     >
       <select-option
         disabled
         selected
+        v-if="!multiple"
         :label="placeholder"
         value=""
       ></select-option>
@@ -24,6 +28,7 @@
 <script>
 import Control from './Control';
 import SelectOption from './SelectOption';
+import bus from '../utils/bus';
 
 export default {
   name: 'select-control',
@@ -51,6 +56,35 @@ export default {
     loading: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Native HTML attributes for select.
+     */
+    multiple: Boolean,
+    size: Number,
+  },
+  data() {
+    return {
+      mutableValue: [],
+    };
+  },
+  computed: {
+    selectModifiers() {
+      return {
+        'is-loading': this.loading,
+        'is-multiple': this.multiple,
+      };
+    },
+  },
+  methods: {
+    input(event) {
+      const { name, selectedOptions, value } = event.target;
+      const values = [...selectedOptions].map(option => option.value);
+      const mutableValue = this.multiple ? values : value;
+
+      this.mutableValue = mutableValue;
+      bus.$emit('update:model', { name, value: mutableValue });
     },
   },
 };
