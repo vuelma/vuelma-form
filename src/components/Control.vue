@@ -1,5 +1,4 @@
 <script>
-import bus from '../utils/bus';
 
 export default {
   name: 'control',
@@ -54,7 +53,7 @@ export default {
      * Emit the update event from the parent.
      */
     emit(name, value) {
-      bus.$emit('update:model', { name, value });
+      this.$emit('update:model', { name, value });
     },
   },
 };
