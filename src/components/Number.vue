@@ -9,7 +9,6 @@
 
 <script>
 import Control from './Control';
-import bus from '../utils/bus';
 
 export default {
   name: 'number-control',
@@ -26,10 +25,7 @@ export default {
      */
     input(event) {
       const { value, name } = event.target;
-      bus.$emit('update:model', {
-        name,
-        value: this.isNumber ? Number(value) : value,
-      });
+      this.emit(name, this.isNumber ? Number(value) : value);
     },
   },
 };

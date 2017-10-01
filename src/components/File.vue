@@ -21,7 +21,6 @@
 
 <script>
 import Control from './Control';
-import bus from '../utils/bus';
 
 export default {
   name: 'file-control',
@@ -63,10 +62,7 @@ export default {
      */
     input(event) {
       const { name, files: value } = event.target;
-      bus.$emit('update:model', {
-        name,
-        value: this.isArray ? [...value] : value,
-      });
+      this.emit(name, this.isArray ? [...value] : value);
     },
   },
 };

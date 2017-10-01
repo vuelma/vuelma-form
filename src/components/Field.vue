@@ -24,6 +24,7 @@
                   :class="modifiers"
                   :value="value"
                   :disabled="disabled"
+                  @update:model="updateModel"
                 ></component>
 
                 <icon-component
@@ -200,6 +201,11 @@ export default {
     },
     hasIconsRight() {
       return this.field.iconRight;
+    },
+  },
+  methods: {
+    updateModel(payload) {
+      this.$emit('update:model', payload);
     },
   },
 };

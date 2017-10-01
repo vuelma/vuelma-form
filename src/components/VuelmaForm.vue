@@ -8,6 +8,7 @@
       :errors="formErrors[field.name]"
       :disabled="field.disabled || disabled"
       :horizontal="field.horizontal || horizontal"
+      @update:model="updateFormObject"
     >
       <slot
         v-bind="field"
@@ -27,7 +28,6 @@
 
 <script>
 import Field from './Field';
-import bus from '../utils/bus';
 
 export default {
   name: 'vuelma-form',
@@ -80,13 +80,13 @@ export default {
       default: true,
     },
   },
-  mounted() {
-    bus.$on('update:model', (field) => {
+  methods: {
+    updateFormObject(payload) {
       this.$emit('update:formObject', {
         ...this.formObject,
-        [field.name]: field.value,
+        [payload.name]: payload.value,
       });
-    });
+    },
   },
 };
 </script>

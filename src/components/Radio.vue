@@ -8,6 +8,7 @@
       :type="type"
       :checked="option.value === value"
       :disabled="option.disabled || disabled"
+      @update:model="emitAgain"
     ></radio-option>
   </div>
 </template>
@@ -29,6 +30,12 @@ export default {
     options: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    emitAgain(payload) {
+      const { name, value } = payload;
+      this.emit(name, value);
     },
   },
 };

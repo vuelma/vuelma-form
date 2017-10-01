@@ -12,7 +12,7 @@
       <select-option
         disabled
         selected
-        v-if="!multiple"
+        v-if="!multiple && this.placeholder !== false"
         :label="placeholder"
         value=""
       ></select-option>
@@ -28,7 +28,6 @@
 <script>
 import Control from './Control';
 import SelectOption from './SelectOption';
-import bus from '../utils/bus';
 
 export default {
   name: 'select-control',
@@ -48,7 +47,10 @@ export default {
     /**
      * The placeholder label for the default option.
      */
-    placeholder: String,
+    placeholder: {
+      type: [String, Boolean],
+      default: false,
+    },
 
     /**
      * Attach loading state to select control.
@@ -86,8 +88,7 @@ export default {
     input(event) {
       const { name, selectedOptions, value } = event.target;
       const values = [...selectedOptions].map(option => option.value);
-
-      bus.$emit('update:model', { name, value: this.multiple ? values : value });
+      this.emit(name, this.multiple ? values : value);
     },
   },
 };
