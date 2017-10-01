@@ -14,6 +14,14 @@
         :name="field.name"
       ></slot>
     </field>
+
+    <slot></slot>
+
+    <button
+      type="submit"
+      class="is-hidden"
+      v-if="submitOnReturn"
+    ></button>
   </form>
 </template>
 
@@ -62,6 +70,14 @@ export default {
     horizontal: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Submit the form on return key press.
+     */
+    submitOnReturn: {
+      type: Boolean,
+      default: true,
     },
   },
   mounted() {
