@@ -12,7 +12,6 @@
 
 <script>
 import Control from './Control';
-import bus from '../utils/bus';
 
 export default {
   name: 'checkbox-control',
@@ -37,7 +36,7 @@ export default {
      */
     input(event) {
       const { name, checked: value } = event.target;
-      bus.$emit('update:model', { name, value });
+      this.emit(name, value);
     },
   },
 };
