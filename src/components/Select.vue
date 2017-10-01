@@ -19,7 +19,6 @@
       ></select-option>
     </select>
   </div>
-  </div>
 </template>
 
 <script>
