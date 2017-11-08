@@ -25,6 +25,8 @@
                   :value="value"
                   :disabled="disabled"
                   @update:model="updateModel"
+                  @blur="onBlur"
+                  @focus="onFocus"
                 ></component>
 
                 <icon-component
@@ -206,6 +208,12 @@ export default {
   methods: {
     updateModel(payload) {
       this.$emit('update:model', payload);
+    },
+    onBlur(name) {
+      this.$emit('blur', name);
+    },
+    onFocus(name) {
+      this.$emit('focus', name);
     },
   },
 };
