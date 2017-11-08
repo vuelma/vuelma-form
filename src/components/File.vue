@@ -7,6 +7,8 @@
         :id="name"
         :value="null"
         @change="input"
+        @blur.stop="onBlur"
+        @focus.stop="onFocus"
       >
       <span class="file-cta">
         <span class="file-icon" v-if="hasIcon">

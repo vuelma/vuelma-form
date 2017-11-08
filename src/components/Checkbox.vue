@@ -5,6 +5,8 @@
       :id="name"
       :checked="value"
       @change="input"
+      @blur.stop="onBlur"
+      @focus.stop="onFocus"
     >
     {{ label }}
   </label>

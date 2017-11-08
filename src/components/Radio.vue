@@ -9,6 +9,8 @@
       :checked="option.value === value"
       :disabled="option.disabled || disabled"
       @update:model="emitAgain"
+      @blur.stop="onBlur"
+      @focus.stop="onFocus"
     ></radio-option>
   </div>
 </template>

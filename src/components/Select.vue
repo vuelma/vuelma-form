@@ -8,6 +8,8 @@
       v-model="mutableValue"
       :id="name"
       @input="input"
+      @blur.stop="onBlur"
+      @focus.stop="onFocus"
     >
       <select-option
         disabled

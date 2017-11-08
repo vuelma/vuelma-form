@@ -1,5 +1,4 @@
 <script>
-
 export default {
   name: 'control',
   props: {
@@ -54,6 +53,20 @@ export default {
      */
     emit(name, value) {
       this.$emit('update:model', { name, value });
+    },
+
+    /**
+     * Handle the blur event of the control.
+     */
+    onBlur() {
+      this.$emit('blur', this.name);
+    },
+
+    /**
+     * Handle the focus event of the control.
+     */
+    onFocus() {
+      this.$emit('focus', this.name);
     },
   },
 };
