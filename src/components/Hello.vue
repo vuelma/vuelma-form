@@ -146,6 +146,8 @@
       ]"
       :form-object.sync="formObject"
       :form-errors="formErrors"
+      @blur="test"
+      @focus="test"
     >
       <template scope="field" slot="message">
         <div class="field">

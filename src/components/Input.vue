@@ -4,6 +4,8 @@
     v-bind="$props"
     :id="name"
     @input="input"
+    @blur.stop="onBlur"
+    @focus.stop="onFocus"
   >
 </template>
 

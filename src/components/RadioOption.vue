@@ -5,6 +5,8 @@
       v-bind="$props"
       :id="name"
       @change="input"
+      @blur.stop="onBlur"
+      @focus.stop="onFocus"
     >
     {{ label }}
   </label>
