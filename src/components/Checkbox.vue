@@ -8,7 +8,7 @@
       @blur.stop="onBlur"
       @focus.stop="onFocus"
     >
-    {{ label }}
+    <span v-text="label"></span>
   </label>
 </template>
 
