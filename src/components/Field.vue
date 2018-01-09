@@ -7,8 +7,8 @@
             class="label"
             v-if="shouldDisplayLabel"
             :for="field.name"
+            v-html="$options.filters.snakeToTitle(label)"
           >
-            {{ label | snakeToTitle }}
           </label>
         </div>
       </optional-root>
